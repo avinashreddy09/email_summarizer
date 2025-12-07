@@ -1,0 +1,39 @@
+spec: "Bulk Email Summarizer"
+owner: "Avinash Reddy"
+goal: >
+  Automate the process of checking unread emails and produce
+  a concise AI-generated summary with action items.
+
+context:
+  tech_stack:
+    - Python 3.10+
+    - Amazon Bedrock (Claude 3)
+    - IMAP (Gmail)
+  constraints:
+    - No email deletion.
+    - Read-only IMAP access.
+    - Credentials loaded from environment variables.
+    - Summaries saved as Markdown reports.
+
+features:
+  - id: fetch-unread-emails
+    description: >
+      Connect to IMAP, fetch unread messages in the last N hours, and
+      normalize to a simple structure (subject, sender, date, snippet).
+  - id: summarize-with-bedrock
+    description: >
+      Send email list to Anthropic Claude 3 model on Amazon Bedrock and
+      generate overview, action items, and priorities.
+  - id: cli-entrypoint
+    description: >
+      Provide a CLI entrypoint (main.py) with an --hours argument and
+      default config from environment.
+  - id: report-markdown
+    description: >
+      Save AI summary as Markdown in a reports/ folder, timestamped, to
+      be referenced in blog screenshots.
+
+acceptance_criteria:
+  - Run `python -m src.main --hours 24` produces a .md report.
+  - If Bedrock is unavailable, tool still prints a basic list of unread emails.
+  - No secrets are hard-coded in the repo.

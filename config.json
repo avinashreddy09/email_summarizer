@@ -1,0 +1,14 @@
+{
+  "model": "claude-3.7-sonnet",
+  "contextLimit": 100000,
+  "hooks": {
+    "beforeCommit": [
+      "python -m compileall src"
+    ]
+  },
+  "project": {
+    "name": "Bulk Email Summarizer",
+    "description": "Summarize unread emails using Amazon Bedrock and Python.",
+    "languages": ["python"]
+  }
+}
